@@ -3,7 +3,7 @@ This repository contains a working code and the data for reproducing the corresp
 
 Folders fig{1,2,3,4} and sifig{1,2,3,4} each contain the data and python scripts needed to reproduce the figures.
 
-optimize_current.f90 is an example code for optimizing probability current from the N=7 C2 nanocluster to the second C3v nanocluster.
+optimize_current.f90 is an example code for optimizing probability flux from the N=7 first C3v nanocluster to the second C3v nanocluster.
 To run:
 
 mpifort -O3 optimize_current.f90 -o optimize
