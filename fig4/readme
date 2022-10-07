@@ -1,0 +1,11 @@
+catalysis/{shear0,shear25} contain data for the number of colored particles as a function of time.
+Each case has three statistical realizations with independent thermal noise.
+
+paramsweep contains data on yield and hopping flux from multiple statistical realizations at shear=1 and shear=25.
+In each subfolder, the .txt files contain the parameter values and the corresponding flow and flux row by row.
+D0running.txt contains D values.
+shear.txt contains shear rates.
+Yekrunning.txt contains \epsilon and \kappa values for the Yukawa potential.
+In omega.txt, first and third columns contain the yield and the hopping flux.
+
+See fig4.py to reproduce the plot. 
