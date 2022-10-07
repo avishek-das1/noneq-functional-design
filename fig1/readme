@@ -1,0 +1,7 @@
+Data is in shearsweep.
+solS contains results for alphabet S.
+solAS contains results for alphabet AS.
+Results are for three independent runs of each.
+D0AA.txt contains the Dij matrix elements for i,j=1,2,...,N, j>i
+shear.txt contains array of all shear values tested
+omega.txt contains corresponding values of densities of the two states and flows between the two states. See fig1.py to reproduce the plot. 
