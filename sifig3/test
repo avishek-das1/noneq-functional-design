@@ -1,0 +1,5 @@
+#m=mpimg.imread('alphmatch/c2_c2v_f2.png')
+#imagebox1 = OffsetImage(m, zoom=0.3)
+#ab1 = AnnotationBbox(imagebox1, (0.9,0.4),frameon=True,pad=0.1,xycoords='axes fraction')
+#axs[0].add_artist(ab1)
+
