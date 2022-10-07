@@ -1,0 +1,13 @@
+shearsweep/solC contains results for alphabet C.
+Results are for three independent runs.
+D0AA.txt contains the Dij matrix elements for i,j=1,2,...,N, j>i
+shear.txt contains array of all shear values tested
+omega.txt contains corresponding values of densities of the two states and flows between the two states.
+
+displacement/eq/fort.392 and displacement/neq/fort.392 contain reactive displacements at equilibrium and nonequilibrium.
+
+duration11/bond11AB and duration11/bond11BA contains durations of reactive trajectories in either directions for many noise realizations.
+
+shear_covm_cove.txt contains in three columns shear values, the difference in covariances \chi between forward and backward trajectories, and the errors in the difference.
+
+See fig2.py to reproduce the plot.

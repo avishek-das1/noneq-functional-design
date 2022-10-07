@@ -1,0 +1,8 @@
+Each of the six folders contain the corresponding optimization data.
+For example, oh_c2v_q2 contain data for optimizing flux q from oh to c2v, starting from the alphabet C.
+In each folder, .txt files contain running information during the optimization.
+sheartot.txt contains the shear flow rate at every optimization step.
+D0runningtot.txt contains the matrix elements for bond energy, given every optimization step. At every step, 15 consecutive elements have matrix indices i,j where i,j=1,2,..,6 and j>i.
+omegatot.txt contains the observable in the second column, at every optimization step.
+
+See sifig1.py to reproduce the plot. 

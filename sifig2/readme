@@ -1,0 +1,11 @@
+Data is in paramsweep.
+
+c2v_S_oh_AS_c2v contains data for first panel of figure.
+S_AS_C_null contains data for second and third panels.
+
+In each folder, .txt files contain the values of the parameters and the corresponding yields and fluxes.
+D0running.txt contains matrix elements for bond energy. At every step, 15 consecutive elements have matrix indices i,j where i,j=1,2,..,6 and j>i. In total we evaluated observables for 41 steps of linear interpolation. Each such sweep was repeated three times with independent statistical realizations.
+shear.txt contains the shear flow rate, which was kept fixed.
+omega.txt contains the yields of the two states and the forward and backward fluxes, corresponding to each bond energy matrix and shear.
+
+See sifig2.py to reproduce the plot. 
