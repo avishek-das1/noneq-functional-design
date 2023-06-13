@@ -11,6 +11,7 @@ from matplotlib.patches import Rectangle,Ellipse
 import matplotlib.colors as mcol
 import matplotlib.cm as cm
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+import matplotlib.path as mpath
 
 #mpl.style.use("classic")
 mpl.rcParams['mathtext.fontset'] = 'cm'
@@ -27,9 +28,9 @@ axs=[fig.add_subplot(gs[0:2,0]),fig.add_subplot(gs[0:2,1]),fig.add_subplot(gs[0:
 
 s=np.arange(0,75,5)
 x=np.zeros((3,np.size(s),4))
-x[0,:,:]=np.loadtxt('shearsweep/solC/run1/omega.txt')
-x[1,:,:]=np.loadtxt('shearsweep/solC/run2/omega.txt')
-x[2,:,:]=np.loadtxt('shearsweep/solC/run3/omega.txt')
+x[0,:,:]=np.loadtxt('shearsweep/solA/run1/omega.txt')
+x[1,:,:]=np.loadtxt('shearsweep/solA/run2/omega.txt')
+x[2,:,:]=np.loadtxt('shearsweep/solA/run3/omega.txt')
 
 rs=np.zeros((3,np.size(s),2))
 rs[:,:,0]=x[:,:,2]/x[:,:,0]
@@ -202,17 +203,17 @@ xqq=0.5*(xq[:-1]+xq[1:])
 yp,yq=np.histogram(yn,bins=20,range=(0.001,0.025),density=True)
 yqq=0.5*(yq[:-1]+yq[1:])
 
-axs[4].plot(xqq,xp,color=(0.35,0.35,0.35),marker='v',linestyle='-',
-        lw=3,fillstyle='none',markersize=15,mew=2,label=r'$P(\tau_\mathrm{I}^{\mathrm{AB}})$')
-axs[4].plot(yqq,yp,color=(1,0.5,0),marker='v',linestyle='--',
-        lw=3,fillstyle='none',markersize=15,mew=2,label=r'$P(\tau_\mathrm{I}^{\mathrm{BA}})$')
-axs[4].set_xlabel(r'$\tau_\mathrm{I}$')
-axs[4].set_ylabel(r'$P(\tau_\mathrm{I})$')
-axs[4].set_xlim(0.001,0.015)
-axs[4].set_ylim(0,180)
-axs[4].legend(loc = 'upper right', ncol = 1, columnspacing=2.,
-        labelspacing=0.5,handletextpad = 0.5,
-        borderpad=0.0,frameon='False',framealpha=0.0)#,bbox_to_anchor=(0.6, 1))
+#axs[4].plot(xqq,xp,color=(0.35,0.35,0.35),marker='v',linestyle='-',
+#        lw=3,fillstyle='none',markersize=15,mew=2,label=r'$P(\tau_\mathrm{I}^{\mathrm{AB}})$')
+#axs[4].plot(yqq,yp,color=(1,0.5,0),marker='v',linestyle='--',
+#        lw=3,fillstyle='none',markersize=15,mew=2,label=r'$P(\tau_\mathrm{I}^{\mathrm{BA}})$')
+#axs[4].set_xlabel(r'$\tau_\mathrm{I}$')
+#axs[4].set_ylabel(r'$P(\tau_\mathrm{I})$')
+#axs[4].set_xlim(0.001,0.015)
+#axs[4].set_ylim(0,180)
+#axs[4].legend(loc = 'upper right', ncol = 1, columnspacing=2.,
+#        labelspacing=0.5,handletextpad = 0.5,
+#        borderpad=0.0,frameon='False',framealpha=0.0)#,bbox_to_anchor=(0.6, 1))
 
 h1, l1 = axs[3].get_legend_handles_labels()
 #h2, l2 = axs[4].get_legend_handles_labels()
@@ -220,7 +221,76 @@ axs[0].legend(h1, l1, loc = 'lower center', ncol = 2, columnspacing=1.4,
         labelspacing=1,handletextpad = 0.5,
         borderpad=0.0,frameon='False',framealpha=0.0,bbox_to_anchor=(0.3, -0.25))
 
-plt.savefig('fig2.png',bbox_inches='tight',pad_inches=0.1)
+M=4 #number of samples
+shear=np.arange(50,55,5)
+l=np.size(shear)
+
+Lmax=1.
+Lmin=-0.
+Mb=20
+binL=np.linspace(Lmin,Lmax,Mb+1)
+edges=0.5*(binL[1:]+binL[:-1])
+
+Ah=np.loadtxt('Ah.txt')
+Bhin=np.loadtxt('Bhin.txt')
+Bh=np.loadtxt('Bh.txt')
+Ahin=np.loadtxt('Ahin.txt')
+
+axs[4].errorbar(Ah[:,0],Ah[:,1],yerr=Ah[:,2],color=(0.35,0.35,0.35),marker='o',lw=3,fillstyle='none',markersize=15,mew=2,capsize=5)
+axs[4].errorbar(Bhin[:,0],Bhin[:,1],yerr=Bhin[:,2],color=(0.35,0.35,0.35),marker='v',lw=3,fillstyle='none',markersize=15,mew=2,capsize=5)
+axs[4].errorbar(Bh[:,0],Bh[:,1],yerr=Bh[:,2],color=(1,0.5,0),marker='o',lw=3,fillstyle='none',markersize=15,mew=2,capsize=5,linestyle='--')
+axs[4].errorbar(Ahin[:,0],Ahin[:,1],yerr=Ahin[:,2],color=(1,0.5,0),marker='v',lw=3,fillstyle='none',markersize=15,mew=2,capsize=5,linestyle='--')
+
+#np.savetxt('Ah.txt',np.stack((edges,Ahm[:,cv],Ahe[:,cv]),axis=-1))
+#np.savetxt('Bhin.txt',np.stack((edges,Bhinm[:,cv],Bhine[:,cv]),axis=-1))
+#np.savetxt('Bh.txt',np.stack((edges,Bhm[:,cv],Bhe[:,cv]),axis=-1))
+#np.savetxt('Ahin.txt',np.stack((edges,Ahinm[:,cv],Ahine[:,cv]),axis=-1))
+
+axs[4].set_xlabel(r'$e_{x}$')
+axs[4].set_ylabel(r'$P(e_{x})$')
+
+axs[4].errorbar(0.05,3.1,yerr=0.2,color=(0.35,0.35,0.35),marker='o',lw=3,fillstyle='none',markersize=15,mew=2,capsize=5)
+axs[4].errorbar(0.35,3.1,yerr=0.2,color=(0.35,0.35,0.35),marker='v',lw=3,fillstyle='none',markersize=15,mew=2,capsize=5)
+axs[4].errorbar(0.35,2.2,yerr=0.2,color=(1,0.5,0),marker='o',lw=3,fillstyle='none',markersize=15,mew=2,capsize=5)
+axs[4].errorbar(0.05,2.2,yerr=0.2,color=(1,0.5,0),marker='v',lw=3,fillstyle='none',markersize=15,mew=2,capsize=5)
+
+axs[4].annotate(r'$\mathrm{A}$',xy=(0.09, 2.98), xycoords='data')
+axs[4].annotate(r'$\mathrm{B}$',xy=(0.39, 2.98), xycoords='data')
+axs[4].annotate(r'$\mathrm{B}$',xy=(0.39, 2.08), xycoords='data')
+axs[4].annotate(r'$\mathrm{A}$',xy=(0.09, 2.08), xycoords='data')
+
+axs[4].annotate("", xy=(0.33, 3.1), xytext=(0.17, 3.1),clip_on=False,zorder=2,xycoords='data',
+        arrowprops=dict(arrowstyle="-|>,head_width=0.24,head_length=0.34",lw=3,color=(0.35,0.35,0.35),linestyle='-'))
+
+axs[4].annotate("", xy=(0.31, 2.2), xytext=(0.14, 2.2),clip_on=False,zorder=2,xycoords='data',
+        arrowprops=dict(arrowstyle="<|-,head_width=0.24,head_length=0.34",lw=3,color=(1,0.5,0),linestyle='--'))
+
+Mt=100
+ts=np.linspace(0,6*np.pi,Mt)
+xts=0.4+0.005*np.cos(ts)
+yts=2.8-0.018*ts
+axs[4].plot(xts,yts,lw=2,color='b')
+
+xts=0.1+0.005*np.cos(ts)
+yts=2.46+0.018*ts
+axs[4].plot(xts,yts,lw=2,color='b')
+
+axs[4].annotate("", xy=(0.403, 2.46), xytext=(0.403, 2.44),clip_on=False,zorder=2,xycoords='data',
+        arrowprops=dict(arrowstyle="<|-,head_width=0.14,head_length=0.17",lw=3,color='b',linestyle='-'))
+
+axs[4].annotate("", xy=(0.103, 2.8), xytext=(0.103, 2.82),clip_on=False,zorder=2,xycoords='data',
+        arrowprops=dict(arrowstyle="<|-,head_width=0.14,head_length=0.17",lw=3,color='b',linestyle='-'))
+
+axs[4].add_patch(Rectangle((0, 1.9), 0.47, 1.5,facecolor='none',edgecolor='k',alpha=0.3))
+
+axs[0].annotate(r'$\mathrm{(a)}$',xy=(0.345, 0.91), xycoords='figure fraction')
+axs[0].annotate(r'$\mathrm{(b)}$',xy=(0.4, 0.91), xycoords='figure fraction')
+axs[0].annotate(r'$\mathrm{(c)}$',xy=(0.7, 0.91), xycoords='figure fraction')
+axs[0].annotate(r'$\mathrm{(d)}$',xy=(0.04, 0.53), xycoords='figure fraction')
+axs[0].annotate(r'$\mathrm{(e)}$',xy=(0.38, 0.53), xycoords='figure fraction')
+axs[0].annotate(r'$\mathrm{(f)}$',xy=(0.7, 0.53), xycoords='figure fraction')
+
+plt.savefig('fig2.png',bbox_inches='tight',pad_inches=0.02)
 #plt.show()
 
 #np.savetxt('fig1_wca.txt',np.stack((x,FAA),axis=1))

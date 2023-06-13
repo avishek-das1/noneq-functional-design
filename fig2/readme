@@ -10,4 +10,6 @@ duration11/bond11AB and duration11/bond11BA contains durations of reactive traje
 
 shear_covm_cove.txt contains in three columns shear values, the difference in covariances \chi between forward and backward trajectories, and the errors in the difference.
 
+Ah.txt, Bh.txt, Ahin.txt and Bhin.txt contain the probability distributions for orientations of the 4 states of the cycle
+
 See fig2.py to reproduce the plot.
