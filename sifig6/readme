@@ -1,0 +1,7 @@
+pathwayfrac_mu.txt and pathwayfrac_nu.txt have three columns, namely, the shear value, fractional contribution of the corresponding pathway, and standard error.
+
+anisotropy.txt has three columns, namely, the shear value, the anisotropy parameter, and standard error.
+
+Rx.txt, Ry.txt and Rz.txt have three columns, namely, the shear value, 2*diffusion constant in the direction x, y and z, and 2*standard error in diffusion constant.
+
+See sifig6.py to reproduce the plot. 
