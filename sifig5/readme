@@ -1,0 +1,12 @@
+den_1 is for optimizing yield of microphase at shear=1.
+den_25 is for optimizing yield of microphase at shear=25.
+f500_1 is for optimizing yield of microphase at shear=1, with lag-time \tau fixed at 500 time steps.
+f500_25 is for optimizing yield of microphase at shear=25, with lag-time \tau fixed at 500 time steps.
+
+Each folder has .txt files with the parameter and observable values at each optimization step.
+D0running.txt contains D values.
+shear.txt contains shear rates.
+Yekrunning.txt contains \epsilon and \kappa values for the Yukawa potential.
+In omega.txt, the second column is the value of the observable, unscaled by the number of particles.
+
+See sifig5.py to reproduce the plot. 
