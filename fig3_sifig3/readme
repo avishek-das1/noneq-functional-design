@@ -1,0 +1,8 @@
+Data is in shearsweep.
+shearsweep/{symms,asymms,curr} contain data for symmetric flux strategies, asymmetric flux strategies, and current strategies.
+D0AA.txt contains the Dij matrix elements for i,j=1,2,...,N, j>i
+shear.txt contains array of all shear values tested
+omega.txt contains corresponding values of densities of the two states and flows between the two states. 
+Each shear sweep was repeated three times with different noise realizations.
+
+See fig3.py to reproduce Fig. 3c and d and Fig. S3 from the SI  
